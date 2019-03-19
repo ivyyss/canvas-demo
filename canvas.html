@@ -21,11 +21,11 @@
     var ctx=canvas.getContext('2d')
     var lastPoint={x:undefined, y:undefined}
     var painting = false
-    var pageWidth=document.documentElement.clientWidth
-    var pageHeight=document.documentElement.clientHeight
-    canvas.width=pageWidth
-    canvas.height=pageHeight
+    autoSizing()
 //绑定监听事件    
+    window.onresize=function(){
+        autoSizing()
+    }
     canvas.onmousedown=function(e){
         painting=true
         var x =e.clientX
@@ -48,6 +48,12 @@
     }
 
 //定义画图函数
+    function autoSizing(){
+        var pageWidth=document.documentElement.clientWidth
+        var pageHeight=document.documentElement.clientHeight
+        canvas.width=pageWidth
+        canvas.height=pageHeight
+    }
     function drawCircle(x,y){
         ctx.beginPath()
         ctx.arc(x, y, 2, 0, 2 * Math.PI)
@@ -59,7 +65,6 @@
         ctx.lineTo(afterX,afterY)
         ctx.closePath()
         ctx.stroke()
-
     }
 </script>
 </body>
