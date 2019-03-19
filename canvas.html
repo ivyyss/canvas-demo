@@ -9,46 +9,90 @@
         #canvas{
             background: red;
         }
+        body{
+            margin:0;
+        }
+        .btnWrapper{
+            position: fixed;
+            bottom: 0;
+            left:0;
+        }
+        .btnWrapper > #brush{
+            display: none;
+        }
+        .btnWrapper.x > #brush{
+            display: inline-block;
+        }
+        .btnWrapper.x > #eraser{
+            display: none;
+        }
     </style>
 </head>
 <body>
   <canvas id="canvas" width=200px height="200px"></canvas>
+  <div id="btnWrapper" class="btnWrapper">
+        <button id="brush">画笔</button>
+        <button id="eraser">橡皮擦</button>
+  </div>
     
     
 <script>
 // 全局变量定义
     var canvas=document.getElementById('canvas')
+    var earser=document.getElementById('eraser')
+    var brush=document.getElementById('brush')
     var ctx=canvas.getContext('2d')
     var lastPoint={x:undefined, y:undefined}
-    var painting = false
-    autoSizing()
+    var using = false  
+    var eraserEnabled=false
+    setCanvasSize()
+    listenMouse(canvas)
 //绑定监听事件    
     window.onresize=function(){
-        autoSizing()
+        setCanvasSize()
     }
-    canvas.onmousedown=function(e){
-        painting=true
+    eraser.onclick=function(){
+        eraserEnabled=true
+        btnWrapper.className='btnWrapper x'
+        
+    }
+    brush.onclick=function(){
+        eraserEnabled=false
+        btnWrapper.className='btnWrapper'
+    }
+
+//定义函数
+    function listenMouse(canvas){
+        canvas.onmousedown=function(e){
         var x =e.clientX
         var y =e.clientY
-        lastPoint={x:x, y:y}
-        drawCircle(x,y)
-    }
-    canvas.onmousemove=function(e){
-        if(painting){
+        using=true
+            if(eraserEnabled){
+                ctx.clearRect(x,y,20,20)
+            }else{
+            lastPoint={x:x, y:y}
+            }
+ 
+        }
+        canvas.onmousemove=function(e){
             var x =e.clientX
             var y =e.clientY
-            var newPoint={x:x, y:y}
-            drawLine(lastPoint.x,lastPoint.y,x,y)
-            lastPoint=newPoint
+            
+            if(!using){return}
+            if(eraserEnabled){
+                ctx.clearRect(x,y,20,20)
+            }else{
+                var newPoint={x:x, y:y}
+                drawLine(lastPoint.x,lastPoint.y,x,y)
+                lastPoint=newPoint
+            }
         }
-
+        canvas.onmouseup=function(e){
+            using=false
+        }
     }
-    canvas.onmouseup=function(e){
-        painting=false
-    }
 
-//定义画图函数
-    function autoSizing(){
+    function setCanvasSize(){
         var pageWidth=document.documentElement.clientWidth
         var pageHeight=document.documentElement.clientHeight
         canvas.width=pageWidth
