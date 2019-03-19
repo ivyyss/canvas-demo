@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Canvas</title>
+    <style>
+        #canvas{
+            background: red;
+        }
+    </style>
+</head>
+<body>
+  <canvas id="canvas" width=200px height="200px"></canvas>
+    
+    
+<script>
+// 全局变量定义
+    var canvas=document.getElementById('canvas')
+    var ctx=canvas.getContext('2d')
+    var lastPoint={x:undefined, y:undefined}
+    var painting = false
+    var pageWidth=document.documentElement.clientWidth
+    var pageHeight=document.documentElement.clientHeight
+    canvas.width=pageWidth
+    canvas.height=pageHeight
+//绑定监听事件    
+    canvas.onmousedown=function(e){
+        painting=true
+        var x =e.clientX
+        var y =e.clientY
+        lastPoint={x:x, y:y}
+        drawCircle(x,y)
+    }
+    canvas.onmousemove=function(e){
+        if(painting){
+            var x =e.clientX
+            var y =e.clientY
+            var newPoint={x:x, y:y}
+            drawLine(lastPoint.x,lastPoint.y,x,y)
+            lastPoint=newPoint
+        }
+
+    }
+    canvas.onmouseup=function(e){
+        painting=false
+    }
+
+//定义画图函数
+    function drawCircle(x,y){
+        ctx.beginPath()
+        ctx.arc(x, y, 2, 0, 2 * Math.PI)
+        ctx.fill()
+    }
+    function drawLine(beforeX,beforeY,afterX,afterY){
+        ctx.beginPath()
+        ctx.moveTo(beforeX,beforeY)
+        ctx.lineTo(afterX,afterY)
+        ctx.closePath()
+        ctx.stroke()
+
+    }
+</script>
+</body>
+</html>
