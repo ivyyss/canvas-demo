@@ -4,6 +4,7 @@
     var earser=document.getElementById('eraser')
     var brush=document.getElementById('brush')
     var ctx=canvas.getContext('2d')
+    ctx.lineWidth=4
     var lastPoint={x:undefined, y:undefined}
     var liTags=document.getElementsByTagName('li')
     var colorHash={
@@ -29,13 +30,22 @@ for(let i=0; i<liTags.length; i++){
     liTags[i].onclick=function(){
         liTags[indexOfWhoActive].classList.remove('active')
         indexOfWhoActive=i
-        console.log(liTags[i])
         liTags[i].classList.add('active')
-        console.log(colorHash[i])
         ctx.strokeStyle=colorHash[i]  
     }
 }
+thick.onclick=function(){
+    ctx.lineWidth=6
+    thick.classList.add('active')
+    thin.classList.remove('active')
 
+}
+thin.onclick=function(){
+    ctx.lineWidth=4
+    thick.classList.remove('active')
+    thin.classList.add('active')
+
+}
     window.onresize=function(){
         setCanvasSize()
     }
