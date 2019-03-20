@@ -4,9 +4,11 @@
     var earser=document.getElementById('eraser')
     var brush=document.getElementById('brush')
     var ctx=canvas.getContext('2d')
+    ctx.fillStyle = 'blue';
+ctx.fillRect(0,0,canvas.width, canvas.height);
     ctx.lineWidth=4
     var lastPoint={x:undefined, y:undefined}
-    var liTags=document.getElementsByTagName('li')
+    var liTags=document.getElementById('colors').getElementsByTagName('li')
     var colorHash={
         0:'black',
         1:'red',
@@ -30,6 +32,7 @@ for(let i=0; i<liTags.length; i++){
     liTags[i].onclick=function(){
         liTags[indexOfWhoActive].classList.remove('active')
         indexOfWhoActive=i
+        console.log(i)
         liTags[i].classList.add('active')
         ctx.strokeStyle=colorHash[i]  
     }
@@ -46,6 +49,19 @@ thin.onclick=function(){
     thin.classList.add('active')
 
 }
+    clear.onclick=function(){
+        ctx.clearRect(0,0,canvas.width,canvas.height)      
+    }
+
+    download.onclick=function(){
+        var url =canvas.toDataURL("image/png")
+        var a =document.createElement('a')
+        document.body.appendChild(a)
+        a.href=url
+        a.download='imgFromCanvas'
+        a.target='_blank'
+        a.click()
+    }
     window.onresize=function(){
         setCanvasSize()
     }

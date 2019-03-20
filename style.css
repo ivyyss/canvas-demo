@@ -3,9 +3,9 @@
     fill: currentColor;
     overflow: hidden;
  }
-#canvas{
-    background:white;
-}
+    /* #canvas{
+        background:white;
+    } */
 body{
     margin:0;
 }
@@ -19,9 +19,9 @@ body{
 }
 
 .btnWrapper svg{
-    padding: 6px;
-    width: 32px;
-    height: 32px;
+    padding: 4px;
+    width: 26px;
+    height: 26px;
     transition: all 0.3s;
 }
 .btnWrapper svg.active{
@@ -29,11 +29,11 @@ body{
 }
 
 .colors{
-    border:1px solid grey;
-    border-radius: 3px;
+    border-right:1px solid grey;
+    border-left:1px solid grey;
     display: inline-block;
-    margin: 10px 10px 5px 60px;
-    padding: 6px 12px;
+    margin: 10px 10px 5px 55px;
+    padding: 6px 8px;
 }
 .colors > li{
     border-radius: 50%;
@@ -53,7 +53,7 @@ body{
     position: fixed;
     top:0px;
     display: inline-block;
-    padding-left: 10px;
+    padding-left: 12px;
 }
 .sizes > li{
     list-style: none;
@@ -64,10 +64,12 @@ body{
     transform: scale(1.3)
 
 }
+.sizes > .thick{
+    margin-bottom: 20px;
+}
 .sizes > .thin{
     height:0;
     width: 20px;
-    margin-top: 20px;
     border-top:3px solid black;
 }
 .sizes > .thick{
