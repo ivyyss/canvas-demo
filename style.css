@@ -3,19 +3,22 @@
     fill: currentColor;
     overflow: hidden;
  }
-    /* #canvas{
-        background:white;
-    } */
+#canvas{
+    background:white;
+    position: fixed;
+    top:0;
+    left:0;
+}
 body{
     margin:0;
 }
 .btnWrapper{
     text-align: center;
-    border:1px solid black;
     position: fixed;
     top:0;
     left:0;
     right: 0;
+    vertical-align: baseline;
 }
 
 .btnWrapper svg{
@@ -32,8 +35,8 @@ body{
     border-right:1px solid grey;
     border-left:1px solid grey;
     display: inline-block;
-    margin: 10px 10px 5px 55px;
-    padding: 6px 8px;
+    margin: 16px 8px 5px 55px;
+    padding: 6px 6px;
 }
 .colors > li{
     border-radius: 50%;
@@ -54,6 +57,7 @@ body{
     top:0px;
     display: inline-block;
     padding-left: 12px;
+    margin: 28px 0px;
 }
 .sizes > li{
     list-style: none;
@@ -65,7 +69,7 @@ body{
 
 }
 .sizes > .thick{
-    margin-bottom: 20px;
+    margin-bottom: 13px;
 }
 .sizes > .thin{
     height:0;
@@ -94,3 +98,9 @@ body{
     background: yellow;
 }  
 
+#clear{
+    width: 16px;
+}
+#download{
+    width: 16px;
+}

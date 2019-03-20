@@ -22,12 +22,16 @@ ctx.fillRect(0,0,canvas.width, canvas.height);
     setCanvasSize()
 //特效检查 
     if(document.body.ontouchstart!==undefined){
+        document.body.ontouchstart=function(e){
+            e.preventDefault()
+        }
         listenTouch(canvas)
     }else{
         listenMouse(canvas)
     }
   
 //绑定监听事件    
+
 for(let i=0; i<liTags.length; i++){
     liTags[i].onclick=function(){
         liTags[indexOfWhoActive].classList.remove('active')
